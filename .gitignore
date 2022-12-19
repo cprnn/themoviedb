@@ -42,6 +42,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+#API keys
+/lib/secret/api_keys.dart
+
+#Folders created by flutter run
 /linux
 /macos
 /web

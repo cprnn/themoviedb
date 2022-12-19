@@ -1,8 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:themoviedb/widgets/custom_navigation_bar.dart';
+import 'package:themoviedb/controllers/movie_controller.dart';
+import 'package:themoviedb/models/movie.dart';
 
-class MoviePage extends StatelessWidget {
-  const MoviePage({super.key});
+class MoviePage extends StatefulWidget {
+  const MoviePage({super.key, required this.movie});
+
+  final Movie movie;
+
+  @override
+  State<MoviePage> createState() => _MoviePage();
+}
+
+class _MoviePage extends State<MoviePage> {
+  final MovieController movieController = MovieController();
+  //List<Movie> nowPlayingMovies = [];
+
+  _MoviePage() {
+    // movieController
+    //     .getNowPlaying()
+    //     .then((value) => setState(() => nowPlayingMovies = value));
+  }
 
   @override
   Widget build(BuildContext context) {

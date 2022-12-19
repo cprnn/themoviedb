@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:themoviedb/controllers/movie_controller.dart';
+import 'package:themoviedb/models/movie.dart';
 
-class TopRated extends StatelessWidget {
+class TopRated extends StatefulWidget {
   const TopRated({super.key});
+
+  @override
+  State<TopRated> createState() => _TopRated();
+}
+
+class _TopRated extends State<TopRated> {
+  final MovieController movieController = MovieController();
+  List<Movie> topRatedMovies = [];
+
+  _TopRated() {
+    movieController
+        .getTopRatedMovies()
+        .then((value) => setState(() => topRatedMovies = value));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +35,10 @@ class TopRated extends StatelessWidget {
                     fontSize: 20,
                     fontWeight: FontWeight.w600),
               ),
-              Text(
-                "See more",
-                style: TextStyle(color: Colors.white54, fontSize: 13),
-              )
+              // Text(
+              //   "See more",
+              //   style: TextStyle(color: Colors.white54, fontSize: 13),
+              // )
             ],
           ),
         ),
@@ -31,12 +47,14 @@ class TopRated extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              for (int i = 1; i < 10; i++)
+              for (var movie in topRatedMovies)
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, "movie/${movie.id}");
+                  },
                   child: Container(
                     width: 200,
-                    height: 300,
+                    height: 410,
                     margin: const EdgeInsets.only(left: 10),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 29, 29, 30),
@@ -58,9 +76,10 @@ class TopRated extends StatelessWidget {
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10),
                           ),
-                          child: Image.asset(
-                            "images/profile.jpg",
-                            height: 200,
+                          child: Image(
+                            image: NetworkImage(
+                                'https://image.tmdb.org/t/p/w342/${movie.posterPath}'),
+                            height: 300,
                             width: 200,
                             fit: BoxFit.cover,
                           ),
@@ -71,31 +90,22 @@ class TopRated extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "Movie title",
-                                style: TextStyle(
+                              Text(
+                                movie.originalTitle,
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              const SizedBox(height: 5),
-                              const Text(
-                                "Genre",
-                                style: TextStyle(
-                                  color: Colors.white54,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              ),
                               const SizedBox(height: 8),
                               Row(
-                                children: const [
-                                  Icon(Icons.star,
+                                children: [
+                                  const Icon(Icons.star,
                                       color: Color.fromARGB(255, 75, 139, 185)),
-                                  SizedBox(width: 5),
-                                  Text("x.x",
-                                      style: TextStyle(
+                                  const SizedBox(width: 5),
+                                  Text("${movie.voteAverage}",
+                                      style: const TextStyle(
                                         color: Colors.white54,
                                         fontSize: 20,
                                       )),

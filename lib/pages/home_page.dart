@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:themoviedb/widgets/custom_navigation_bar.dart';
-import 'package:themoviedb/widgets/new_movies.dart';
+import 'package:themoviedb/widgets/now_playing.dart';
 import 'package:themoviedb/widgets/upcoming_movies.dart';
 
 import '../widgets/top_rated.dart';
@@ -76,7 +76,7 @@ class HomePage extends StatelessWidget {
                 const SizedBox(height: 30),
                 const UpcomingMovies(),
                 const SizedBox(height: 30),
-                const NewMovies(),
+                const NowPlaying(),
                 const SizedBox(height: 30),
                 const TopRated(),
                 const SizedBox(height: 10),

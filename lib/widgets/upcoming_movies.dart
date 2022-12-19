@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:themoviedb/controllers/movie_controller.dart';
+import 'package:themoviedb/models/movie.dart';
 
-class UpcomingMovies extends StatelessWidget {
+class UpcomingMovies extends StatefulWidget {
   const UpcomingMovies({super.key});
+
+  @override
+  State<UpcomingMovies> createState() => _UpcomingMovies();
+}
+
+class _UpcomingMovies extends State<UpcomingMovies> {
+  final MovieController movieController = MovieController();
+  List<Movie> upcomingMovies = [];
+
+  _UpcomingMovies() {
+    movieController
+        .getUpcomingMovies()
+        .then((value) => setState(() => upcomingMovies = value));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +47,20 @@ class UpcomingMovies extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              for (int i = 1; i < 5; i++)
+              for (var movie in upcomingMovies)
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, "movie");
+                    Navigator.pushNamed(context, "movie/${movie.id}");
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        "images/profile.jpg", //TODO: alterar pelas imagens da API
-                        height: 200,
-                        width: 300,
+                      child: Image(
+                        image: NetworkImage(
+                            'https://image.tmdb.org/t/p/w342/${movie.posterPath}'),
+                        height: 300,
+                        width: 150,
                         fit: BoxFit.cover,
                       ),
                     ),
