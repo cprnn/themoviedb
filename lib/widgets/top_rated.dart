@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:themoviedb/controllers/movie_controller.dart';
 import 'package:themoviedb/models/movie.dart';
+import 'package:themoviedb/pages/movie_page.dart';
 
 class TopRated extends StatefulWidget {
   const TopRated({super.key});
@@ -50,7 +51,8 @@ class _TopRated extends State<TopRated> {
               for (var movie in topRatedMovies)
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, "movie/${movie.id}");
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: ((context) => MoviePage(movie: movie))));
                   },
                   child: Container(
                     width: 200,

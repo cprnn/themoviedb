@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:themoviedb/widgets/custom_navigation_bar.dart';
 import 'package:themoviedb/widgets/now_playing.dart';
 import 'package:themoviedb/widgets/upcoming_movies.dart';
-
-import '../widgets/top_rated.dart';
+import 'package:themoviedb/widgets/top_rated.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -44,36 +43,6 @@ class HomePage extends StatelessWidget {
                         ),
                       ]),
                 ),
-                Container(
-                  height: 60,
-                  padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 29, 29, 30),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.search,
-                        color: Color.fromARGB(255, 75, 139, 185),
-                      ),
-                      Container(
-                        width: 300,
-                        margin: const EdgeInsets.only(left: 5),
-                        child: TextFormField(
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
-                              hintText: "Search",
-                              hintStyle: TextStyle(
-                                  color: Color.fromARGB(255, 89, 91, 92),
-                                  fontSize: 12)),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 30),
                 const UpcomingMovies(),
                 const SizedBox(height: 30),
                 const NowPlaying(),

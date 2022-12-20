@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:themoviedb/controllers/movie_controller.dart';
 import 'package:themoviedb/models/movie.dart';
+import 'package:themoviedb/pages/movie_page.dart';
 
 class UpcomingMovies extends StatefulWidget {
   const UpcomingMovies({super.key});
@@ -50,7 +51,8 @@ class _UpcomingMovies extends State<UpcomingMovies> {
               for (var movie in upcomingMovies)
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, "movie/${movie.id}");
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: ((context) => MoviePage(movie: movie))));
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),

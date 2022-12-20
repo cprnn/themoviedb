@@ -1,26 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:themoviedb/widgets/custom_navigation_bar.dart';
-import 'package:themoviedb/controllers/movie_controller.dart';
 import 'package:themoviedb/models/movie.dart';
 
-class MoviePage extends StatefulWidget {
+class MoviePage extends StatelessWidget {
   const MoviePage({super.key, required this.movie});
 
   final Movie movie;
-
-  @override
-  State<MoviePage> createState() => _MoviePage();
-}
-
-class _MoviePage extends State<MoviePage> {
-  final MovieController movieController = MovieController();
-  //List<Movie> nowPlayingMovies = [];
-
-  _MoviePage() {
-    // movieController
-    //     .getNowPlaying()
-    //     .then((value) => setState(() => nowPlayingMovies = value));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +14,9 @@ class _MoviePage extends State<MoviePage> {
         children: [
           Opacity(
             opacity: 0.4,
-            child: Image.asset(
-              "images/profile.jpg",
+            child: Image(
+              image: NetworkImage(
+                  'https://image.tmdb.org/t/p/w342/${movie.backdropPath}'),
               height: 300,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -64,18 +50,19 @@ class _MoviePage extends State<MoviePage> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(15),
                               boxShadow: const [
                                 BoxShadow(
-                                  color: Color.fromARGB(136, 111, 111, 111),
+                                  color: Color.fromARGB(135, 66, 66, 66),
                                   spreadRadius: 1,
                                   blurRadius: 8,
                                 ),
                               ]),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              "images/profile.jpg",
+                            child: Image(
+                              image: NetworkImage(
+                                  'https://image.tmdb.org/t/p/w342/${movie.posterPath}'),
                               height: 250,
                               width: 180,
                             ),
@@ -84,70 +71,58 @@ class _MoviePage extends State<MoviePage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 2),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 10),
+                        vertical: 10, horizontal: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          children: const [
-                            Icon(Icons.star,
+                          children: [
+                            const Icon(Icons.star,
                                 color: Color.fromARGB(255, 75, 139, 185),
-                                size: 50),
-                            Text("x.x",
-                                style: TextStyle(
+                                size: 30),
+                            Text("${movie.voteAverage}",
+                                style: const TextStyle(
                                   color: Colors.white,
-                                  fontSize: 50,
+                                  fontSize: 30,
                                 ))
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          "Movie Title",
-                          style: TextStyle(
+                        Text(
+                          movie.originalTitle,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 30,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          "Movie Title em portugues",
-                          style: TextStyle(
+                        const SizedBox(height: 5),
+                        Text(
+                          movie.title,
+                          style: const TextStyle(
                             color: Colors.white54,
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          "Genre",
-                          style: TextStyle(
-                            color: Colors.white54,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
                         const SizedBox(height: 5),
-                        const Text(
-                          "Year",
-                          style: TextStyle(
+                        Text(
+                          movie.releaseDate,
+                          style: const TextStyle(
                             color: Colors.white54,
                             fontSize: 15,
                             fontWeight: FontWeight.w200,
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Text(
-                          "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
-                          style: TextStyle(
+                        Text(
+                          movie.overview,
+                          style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
                           ),
                           textAlign: TextAlign.left,
                         ),

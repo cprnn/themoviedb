@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:themoviedb/pages/home_page.dart';
-import 'package:themoviedb/pages/movie_page.dart';
+import 'package:themoviedb/pages/search_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -29,7 +29,6 @@ class _MyAppState extends State<MyApp> {
         ),
         routes: {
           "/": (context) => const HomePage(),
-          "movie": (context) => const MoviePage(),
         });
   }
 }

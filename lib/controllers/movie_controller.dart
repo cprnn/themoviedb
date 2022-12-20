@@ -8,31 +8,6 @@ class MovieController {
   final String apiKey = tmdbApiKey;
   final String apiToken = tmdbToken;
 
-  Future<List<Movie>> getMovie() async {
-    if (apiKey.isEmpty) {
-      throw AssertionError('The API key is not available.');
-    }
-
-    final url = Uri(
-      scheme: 'https',
-      host: 'api.themoviedb.org',
-      path: '3/movie/',
-      queryParameters: {
-        'api_key': apiKey,
-      },
-    );
-
-    Response response = await get(url);
-
-    if (response.statusCode == 200) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      List<dynamic> results = body["results"];
-      return results.map((item) => Movie.fromJson(item)).toList();
-    } else {
-      throw "Unable to retrieve the upcoming movies.";
-    }
-  }
-
   Future<List<Movie>> getUpcomingMovies() async {
     if (apiKey.isEmpty) {
       throw AssertionError('The API key is not available.');
@@ -44,6 +19,8 @@ class MovieController {
       path: '3/movie/upcoming',
       queryParameters: {
         'api_key': apiKey,
+        'include_adult': 'false',
+        'language': 'pt-BR',
       },
     );
 
@@ -69,6 +46,8 @@ class MovieController {
       path: '3/movie/top_rated',
       queryParameters: {
         'api_key': apiKey,
+        'include_adult': 'false',
+        'language': 'pt-BR',
       },
     );
 
@@ -94,6 +73,8 @@ class MovieController {
       path: '3/movie/now_playing',
       queryParameters: {
         'api_key': apiKey,
+        'include_adult': 'false',
+        'language': 'pt-BR',
       },
     );
 
@@ -108,29 +89,31 @@ class MovieController {
     }
   }
 
-  // TODO: implement the genres
-  // Future<List<Movie>> getGenres() async {
-  //   if (apiKey.isEmpty) {
-  //     throw AssertionError('The API key is not available.');
-  //   }
+  Future<List<Movie>> getMovieSearch(movie) async {
+    if (apiKey.isEmpty) {
+      throw AssertionError('The API key is not available.');
+    }
 
-  //   final url = Uri(
-  //     scheme: 'https',
-  //     host: 'api.themoviedb.org',
-  //     path: '3/genres/movie/list',
-  //     queryParameters: {
-  //       'api_key': apiKey,
-  //     },
-  //   );
+    final url = Uri(
+      scheme: 'https',
+      host: 'api.themoviedb.org',
+      path: '3/search/movie/',
+      queryParameters: {
+        'api_key': apiKey,
+        'query': movie,
+        'include_adult': 'false',
+        'language': 'pt-BR',
+      },
+    );
 
-  //   Response response = await get(url);
+    Response response = await get(url);
 
-  //   if (response.statusCode == 200) {
-  //     Map<String, dynamic> body = jsonDecode(response.body);
-  //     List<dynamic> results = body["results"];
-  //     return results.map((item) => Movie.fromJson(item)).toList();
-  //   } else {
-  //     throw "Unable to retrieve the upcoming movies.";
-  //   }
-  // }
+    if (response.statusCode == 200) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      List<dynamic> results = body["results"];
+      return results.map((item) => Movie.fromJson(item)).toList();
+    } else {
+      throw "Unable to retrieve the upcoming movies.";
+    }
+  }
 }

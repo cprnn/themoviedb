@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:themoviedb/controllers/movie_controller.dart';
 import 'package:themoviedb/models/movie.dart';
+import 'package:themoviedb/pages/movie_page.dart';
 
 class NowPlaying extends StatefulWidget {
   const NowPlaying({super.key});
@@ -50,11 +51,12 @@ class _NowPlaying extends State<NowPlaying> {
               for (var movie in nowPlayingMovies)
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, "movie/${movie.id}");
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: ((context) => MoviePage(movie: movie))));
                   },
                   child: Container(
                     width: 200,
-                    height: 400,
+                    height: 410,
                     margin: const EdgeInsets.only(left: 10),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 29, 29, 30),
