@@ -60,9 +60,9 @@ class _SearchPage extends State<SearchPage> {
                             width: 50,
                             fit: BoxFit.cover,
                             placeholder: (context, url) =>
-                                Image.asset("../../images/claquete.png"),
+                                Image.asset("images/claquete.png"),
                             errorWidget: (context, url, error) =>
-                                Image.asset("../../images/claquete.png"),
+                                Image.asset("images/claquete.png"),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),

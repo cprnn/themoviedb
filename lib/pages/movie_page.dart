@@ -71,9 +71,9 @@ class MoviePage extends StatelessWidget {
                               width: 150,
                               fit: BoxFit.cover,
                               placeholder: (context, url) =>
-                                  Image.asset("../../images/claquete.png"),
+                                  Image.asset("images/claquete.png"),
                               errorWidget: (context, url, error) =>
-                                  Image.asset("../../images/claquete.png"),
+                                  Image.asset("images/claquete.png"),
                             ),
                           ),
                         ),

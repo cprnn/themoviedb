@@ -86,9 +86,9 @@ class _NowPlaying extends State<NowPlaying> {
                             width: 200,
                             fit: BoxFit.cover,
                             placeholder: (context, url) =>
-                                Image.asset("../../images/claquete.png"),
+                                Image.asset("images/claquete.png"),
                             errorWidget: (context, url, error) =>
-                                Image.asset("../../images/claquete.png"),
+                                Image.asset("images/claquete.png"),
                           ),
                         ),
                         Padding(
