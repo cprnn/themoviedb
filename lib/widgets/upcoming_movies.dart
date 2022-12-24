@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:themoviedb/controllers/movie_controller.dart';
 import 'package:themoviedb/models/movie.dart';
@@ -58,12 +59,16 @@ class _UpcomingMovies extends State<UpcomingMovies> {
                     padding: const EdgeInsets.only(left: 10),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image(
-                        image: NetworkImage(
-                            'https://image.tmdb.org/t/p/w342/${movie.posterPath}'),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            'https://image.tmdb.org/t/p/w342/${movie.posterPath}',
                         height: 300,
                         width: 150,
                         fit: BoxFit.cover,
+                        placeholder: (context, url) =>
+                            Image.asset("../../images/claquete.png"),
+                        errorWidget: (context, url, error) =>
+                            Image.asset("../../images/claquete.png"),
                       ),
                     ),
                   ),

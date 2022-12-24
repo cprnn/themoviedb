@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:themoviedb/widgets/custom_navigation_bar.dart';
 import 'package:themoviedb/models/movie.dart';
@@ -14,12 +15,15 @@ class MoviePage extends StatelessWidget {
         children: [
           Opacity(
             opacity: 0.4,
-            child: Image(
-              image: NetworkImage(
-                  'https://image.tmdb.org/t/p/w342/${movie.backdropPath}'),
+            child: CachedNetworkImage(
+              imageUrl: 'https://image.tmdb.org/t/p/w342/${movie.backdropPath}',
               height: 300,
               width: double.infinity,
               fit: BoxFit.cover,
+              placeholder: (context, url) =>
+                  Image.asset("../../images/claquete.png"),
+              errorWidget: (context, url, error) =>
+                  Image.asset("../../images/claquete.png"),
             ),
           ),
           SingleChildScrollView(
@@ -60,11 +64,16 @@ class MoviePage extends StatelessWidget {
                               ]),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: Image(
-                              image: NetworkImage(
-                                  'https://image.tmdb.org/t/p/w342/${movie.posterPath}'),
-                              height: 250,
-                              width: 180,
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  'https://image.tmdb.org/t/p/w342/${movie.posterPath}',
+                              height: 300,
+                              width: 150,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) =>
+                                  Image.asset("../../images/claquete.png"),
+                              errorWidget: (context, url, error) =>
+                                  Image.asset("../../images/claquete.png"),
                             ),
                           ),
                         ),
