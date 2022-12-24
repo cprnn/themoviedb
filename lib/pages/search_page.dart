@@ -37,7 +37,7 @@ class _SearchPage extends State<SearchPage> {
                         builder: ((context) => MoviePage(movie: movie))));
                   },
                   child: Container(
-                      height: 70,
+                      height: 80,
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 29, 29, 30),
                         borderRadius: BorderRadius.circular(10),
@@ -56,25 +56,28 @@ class _SearchPage extends State<SearchPage> {
                           CachedNetworkImage(
                             imageUrl:
                                 'https://image.tmdb.org/t/p/w342/${movie.posterPath}',
-                            height: 70,
-                            width: 50,
+                            height: 80,
+                            width: 60,
                             fit: BoxFit.cover,
                             placeholder: (context, url) =>
                                 Image.asset("images/claquete.png"),
                             errorWidget: (context, url, error) =>
                                 Image.asset("images/claquete.png"),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              movie.originalTitle,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                movie.originalTitle,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    overflow: TextOverflow.clip),
+                                maxLines: 2,
                               ),
                             ),
-                          )
+                          ),
                         ],
                       )),
                 ),
